@@ -1,0 +1,55 @@
+export function MortgageLogoSVG({
+  className,
+  width,
+  height,
+}: {
+  width?: number;
+  height?: number;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 98 51"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      {/* House shape with key - professional and subtle */}
+      <path
+        d="M25.5144 0.394531H73.3011C86.9178 0.394531 97.9949 11.5154 97.9949 25.1847C97.9949 38.8539 86.9178 49.9748 73.3011 49.9748H25.5144C11.8977 49.9748 0.820557 38.8539 0.820557 25.1847C0.820557 11.5154 11.8977 0.394531 25.5144 0.394531Z"
+        fill="#1f2937"
+      />
+      {/* House icon */}
+      <path
+        d="M49.4077 13L57.4077 20V35H41.4077V20L49.4077 13Z"
+        fill="#f9fafb"
+        stroke="#e5e7eb"
+        strokeWidth="1"
+      />
+      {/* Door */}
+      <rect
+        x="46.4077"
+        y="28"
+        width="6"
+        height="7"
+        fill="#d1d5db"
+      />
+      {/* Key shape - subtle and integrated */}
+      <path
+        d="M30 25.5H37.5M37.5 25.5C37.5 27.1569 36.1569 28.5 34.5 28.5C32.8431 28.5 31.5 27.1569 31.5 25.5C31.5 23.8431 32.8431 22.5 34.5 22.5C36.1569 22.5 37.5 23.8431 37.5 25.5ZM37.5 25.5H39.5M39.5 25.5V24M39.5 25.5V27"
+        stroke="#f9fafb"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Document/contract lines - subtle suggestion of paperwork */}
+      <g opacity="0.6">
+        <line x1="62" y1="18" x2="68" y2="18" stroke="#f9fafb" strokeWidth="1"/>
+        <line x1="62" y1="21" x2="66" y2="21" stroke="#f9fafb" strokeWidth="1"/>
+        <line x1="62" y1="24" x2="68" y2="24" stroke="#f9fafb" strokeWidth="1"/>
+      </g>
+    </svg>
+  );
+}

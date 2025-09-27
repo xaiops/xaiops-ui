@@ -34,32 +34,32 @@ function getThreadSearchMetadata(
 }
 
 export function ThreadProvider({ children }: { children: ReactNode }) {
-  // Get environment variables (consistent with StreamProvider pattern)
+  // Get environment variables as fallbacks (consistent with StreamProvider)
   const envApiUrl: string | undefined = process.env.NEXT_PUBLIC_API_URL;
   const envAssistantId: string | undefined = process.env.NEXT_PUBLIC_ASSISTANT_ID;
 
-  const [apiUrl] = useQueryState("apiUrl");
-  const [assistantId] = useQueryState("assistantId");
+  const [apiUrl] = useQueryState("apiUrl", {
+    defaultValue: envApiUrl || "",
+  });
+  const [assistantId] = useQueryState("assistantId", {
+    defaultValue: envAssistantId || "",
+  });
   const [threads, setThreads] = useState<Thread[]>([]);
   const [threadsLoading, setThreadsLoading] = useState(false);
 
-  // Determine final values to use, prioritizing URL params then env vars  
-  const finalApiUrl = apiUrl || envApiUrl;
-  const finalAssistantId = assistantId || envAssistantId;
-
   const getThreads = useCallback(async (): Promise<Thread[]> => {
-    if (!finalApiUrl || !finalAssistantId) return [];
-    const client = createClient(finalApiUrl, getApiKey() ?? undefined);
+    if (!apiUrl || !assistantId) return [];
+    const client = createClient(apiUrl, getApiKey() ?? undefined);
 
     const threads = await client.threads.search({
       metadata: {
-        ...getThreadSearchMetadata(finalAssistantId),
+        ...getThreadSearchMetadata(assistantId),
       },
       limit: 100,
     });
 
     return threads;
-  }, [finalApiUrl, finalAssistantId]);
+  }, [apiUrl, assistantId]);
 
   const value = {
     getThreads,

@@ -141,35 +141,35 @@ export function AssistantMessage({
   }
 
   return (
-    <div className="group message-group ai-group w-full">
-      <div className="message-container">
-        <div className="flex items-start gap-4">
-          {!isToolResult && (
-            <div className="flex-shrink-0">
-              <div className="message-avatar ai-avatar">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-            </div>
-          )}
-          <div className="flex flex-col gap-3 flex-1 min-w-0">
-            {isToolResult ? (
-              <>
-                <ToolResult message={message} />
-                <Interrupt
-                  interruptValue={threadInterrupt?.value}
-                  isLastMessage={isLastMessage}
-                  hasNoAIOrToolMessages={hasNoAIOrToolMessages}
-                />
-              </>
-            ) : (
-              <>
-                {contentString.length > 0 && (
-                  <div className="ai-message-content message-text">
-                    <MarkdownText>{contentString}</MarkdownText>
+    <div className="group mr-auto flex items-start gap-2">
+      <div className="flex flex-col gap-2 max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+        {isToolResult ? (
+          <>
+            <ToolResult message={message} />
+            <Interrupt
+              interruptValue={threadInterrupt?.value}
+              isLastMessage={isLastMessage}
+              hasNoAIOrToolMessages={hasNoAIOrToolMessages}
+            />
+          </>
+        ) : (
+          <>
+            {contentString.length > 0 && (
+              <div className="py-1">
+                <div className="!w-fit" style={{width: 'fit-content'}}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">
+                      AI
+                    </div>
                   </div>
-                )}
+                  <div className="bg-muted rounded-2xl px-4 py-3 text-left overflow-hidden">
+                    <div className="break-words overflow-wrap-anywhere">
+                      <MarkdownText>{contentString}</MarkdownText>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {!hideToolCalls && (
               <>
@@ -196,23 +196,27 @@ export function AssistantMessage({
               isLastMessage={isLastMessage}
               hasNoAIOrToolMessages={hasNoAIOrToolMessages}
             />
-                <div
-                  className={cn(
-                    "flex items-center gap-2 transition-opacity message-actions",
-                    "opacity-0 group-focus-within:opacity-100 group-hover:opacity-100",
-                  )}
-                >
-                  <CommandBar
-                    content={contentString}
-                    isAiMessage={true}
-                    isLoading={isLoading}
-                    handleRegenerate={() => handleRegenerate(parentCheckpoint)}
-                  />
-                </div>
-              </>
-            )}
-          </div>
-        </div>
+            <div
+              className={cn(
+                "mr-auto flex items-center gap-2 transition-opacity",
+                "opacity-0 group-focus-within:opacity-100 group-hover:opacity-100",
+              )}
+            >
+              <BranchSwitcher
+                branch={meta?.branch}
+                branchOptions={meta?.branchOptions}
+                onSelect={(branch) => thread.setBranch(branch)}
+                isLoading={isLoading}
+              />
+              <CommandBar
+                content={contentString}
+                isLoading={isLoading}
+                isAiMessage={true}
+                handleRegenerate={() => handleRegenerate(parentCheckpoint)}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -220,22 +224,18 @@ export function AssistantMessage({
 
 export function AssistantMessageLoading() {
   return (
-    <div className="group message-group ai-group w-full">
-      <div className="message-container">
-        <div className="flex items-start gap-4">
-          <div className="flex-shrink-0">
-            <div className="message-avatar ai-avatar">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
+    <div className="mr-auto flex items-start gap-2">
+      <div className="flex flex-col gap-2 max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+        <div className="!w-fit" style={{width: 'fit-content'}}>
+          <div className="flex items-center gap-2 mb-2">
+            <div className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">
+              AI
             </div>
           </div>
-          <div className="flex flex-col gap-3 flex-1 min-w-0">
-            <div className="bg-muted flex h-8 items-center gap-1 rounded-2xl px-4 py-2 w-fit">
-              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>
-              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_0.5s_infinite] rounded-full"></div>
-              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_1s_infinite] rounded-full"></div>
-            </div>
+          <div className="bg-muted flex h-8 items-center gap-1 rounded-2xl px-4 py-2">
+            <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>
+            <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_0.5s_infinite] rounded-full"></div>
+            <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_1s_infinite] rounded-full"></div>
           </div>
         </div>
       </div>

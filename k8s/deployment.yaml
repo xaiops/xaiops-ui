@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mortgage-assistant-ui
+  labels:
+    app: mortgage-assistant-ui
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mortgage-assistant-ui
+  template:
+    metadata:
+      labels:
+        app: mortgage-assistant-ui
+        version: v1
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 0
+        fsGroup: 0
+      containers:
+      - name: mortgage-assistant-ui
+        image: quay.io/rbrhssa/mortgage-agent-ui:latest
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "8080"
+        - name: HOSTNAME
+          value: "0.0.0.0"
+        # Add your application-specific environment variables here
+        - name: LANGGRAPH_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: langgraph-api-url
+              optional: true
+        - name: API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: api-base-url
+              optional: true
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          timeoutSeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1001
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: false
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: var-cache-volume
+          mountPath: /opt/app-root/src/.next/cache
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+      - name: var-cache-volume
+        emptyDir: {}
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst

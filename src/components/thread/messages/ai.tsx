@@ -141,24 +141,35 @@ export function AssistantMessage({
   }
 
   return (
-    <div className="group mr-auto flex items-start gap-2">
-      <div className="flex flex-col gap-2">
-        {isToolResult ? (
-          <>
-            <ToolResult message={message} />
-            <Interrupt
-              interruptValue={threadInterrupt?.value}
-              isLastMessage={isLastMessage}
-              hasNoAIOrToolMessages={hasNoAIOrToolMessages}
-            />
-          </>
-        ) : (
-          <>
-            {contentString.length > 0 && (
-              <div className="py-1">
-                <MarkdownText>{contentString}</MarkdownText>
+    <div className="group message-group ai-group w-full">
+      <div className="message-container">
+        <div className="flex items-start gap-4">
+          {!isToolResult && (
+            <div className="flex-shrink-0">
+              <div className="message-avatar ai-avatar">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
               </div>
-            )}
+            </div>
+          )}
+          <div className="flex flex-col gap-3 flex-1 min-w-0">
+            {isToolResult ? (
+              <>
+                <ToolResult message={message} />
+                <Interrupt
+                  interruptValue={threadInterrupt?.value}
+                  isLastMessage={isLastMessage}
+                  hasNoAIOrToolMessages={hasNoAIOrToolMessages}
+                />
+              </>
+            ) : (
+              <>
+                {contentString.length > 0 && (
+                  <div className="ai-message-content message-text">
+                    <MarkdownText>{contentString}</MarkdownText>
+                  </div>
+                )}
 
             {!hideToolCalls && (
               <>
@@ -185,27 +196,23 @@ export function AssistantMessage({
               isLastMessage={isLastMessage}
               hasNoAIOrToolMessages={hasNoAIOrToolMessages}
             />
-            <div
-              className={cn(
-                "mr-auto flex items-center gap-2 transition-opacity",
-                "opacity-0 group-focus-within:opacity-100 group-hover:opacity-100",
-              )}
-            >
-              <BranchSwitcher
-                branch={meta?.branch}
-                branchOptions={meta?.branchOptions}
-                onSelect={(branch) => thread.setBranch(branch)}
-                isLoading={isLoading}
-              />
-              <CommandBar
-                content={contentString}
-                isLoading={isLoading}
-                isAiMessage={true}
-                handleRegenerate={() => handleRegenerate(parentCheckpoint)}
-              />
-            </div>
-          </>
-        )}
+                <div
+                  className={cn(
+                    "flex items-center gap-2 transition-opacity message-actions",
+                    "opacity-0 group-focus-within:opacity-100 group-hover:opacity-100",
+                  )}
+                >
+                  <CommandBar
+                    content={contentString}
+                    isAiMessage={true}
+                    isLoading={isLoading}
+                    handleRegenerate={() => handleRegenerate(parentCheckpoint)}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -213,11 +220,24 @@ export function AssistantMessage({
 
 export function AssistantMessageLoading() {
   return (
-    <div className="mr-auto flex items-start gap-2">
-      <div className="bg-muted flex h-8 items-center gap-1 rounded-2xl px-4 py-2">
-        <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>
-        <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_0.5s_infinite] rounded-full"></div>
-        <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_1s_infinite] rounded-full"></div>
+    <div className="group message-group ai-group w-full">
+      <div className="message-container">
+        <div className="flex items-start gap-4">
+          <div className="flex-shrink-0">
+            <div className="message-avatar ai-avatar">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3 flex-1 min-w-0">
+            <div className="bg-muted flex h-8 items-center gap-1 rounded-2xl px-4 py-2 w-fit">
+              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>
+              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_0.5s_infinite] rounded-full"></div>
+              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_1s_infinite] rounded-full"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

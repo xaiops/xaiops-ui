@@ -41,38 +41,43 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* Premium OLED Dark Mode Palette */
+  --background: oklch(0 0 0);                  /* OLED Black background */
+  --foreground: oklch(0.94 0.003 240);         /* Softer white text with subtle warmth */
+  --card: oklch(0.06 0.005 240);               /* Subtle card surface */
+  --card-foreground: oklch(0.92 0.003 240);    /* Refined card text */
+  --popover: oklch(0.05 0.005 240);            /* Deep popover background */
+  --popover-foreground: oklch(0.94 0.003 240); /* Clean popover text */
+  --primary: oklch(0.68 0.14 220);             /* Premium blue accent */
+  --primary-foreground: oklch(0.98 0 0);       /* Crisp white on primary */
+  --secondary: oklch(0.12 0.008 240);          /* Refined secondary */
+  --secondary-foreground: oklch(0.78 0.008 240); /* Balanced secondary text */
+  --muted: oklch(0.08 0.005 240);              /* Subtle muted background */
+  --muted-foreground: oklch(0.58 0.012 240);   /* Refined muted text */
+  --accent: oklch(0.15 0.01 240);              /* Elegant accent surface */
+  --accent-foreground: oklch(0.88 0.008 240);  /* Clean accent text */
+  --destructive: oklch(0.52 0.16 15);          /* Professional red */
+  --destructive-foreground: oklch(0.96 0.003 15); /* Clean destructive text */
+  --border: oklch(0.22 0.015 240);             /* Refined borders */
+  --input: oklch(0.08 0.008 240);              /* Subtle input backgrounds */
+  --ring: oklch(0.58 0.12 220);                /* Elegant focus rings */
+  
+  /* Refined Chart Colors */
+  --chart-1: oklch(0.62 0.16 260);
+  --chart-2: oklch(0.67 0.13 180);
+  --chart-3: oklch(0.72 0.15 85);
+  --chart-4: oklch(0.6 0.19 320);
+  --chart-5: oklch(0.65 0.17 25);
+  
+  /* Elegant Sidebar */
+  --sidebar: oklch(0.03 0.003 240);
+  --sidebar-foreground: oklch(0.88 0.008 240);
+  --sidebar-primary: oklch(0.62 0.15 220);
+  --sidebar-primary-foreground: oklch(0.96 0 0);
+  --sidebar-accent: oklch(0.1 0.008 240);
+  --sidebar-accent-foreground: oklch(0.8 0.01 240);
+  --sidebar-border: oklch(0.18 0.012 240);
+  --sidebar-ring: oklch(0.5 0.1 220);
 }
 
 @theme inline {
@@ -147,5 +152,484 @@
 
   .shadow-inner-left {
     box-shadow: inset 9px 0 6px -1px rgb(0 0 0 / 0.02);
+  }
+
+  /* Clean Dark Mode Utilities */
+  .dark .shadow-inner-right {
+    box-shadow: inset -9px 0 8px -1px rgb(0 0 0 / 0.08);
+  }
+
+  .dark .shadow-inner-left {
+    box-shadow: inset 9px 0 8px -1px rgb(0 0 0 / 0.08);
+  }
+
+  /* Premium OLED Enhancements */
+  .dark .enhanced-card {
+    border: 1px solid oklch(0.18 0.012 240);
+    background: linear-gradient(135deg, 
+      oklch(0.04 0.008 240) 0%, 
+      oklch(0.06 0.005 245) 100%);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.3),
+                0 2px 4px rgb(0 0 0 / 0.2),
+                inset 0 1px 0 oklch(0.15 0.01 240);
+  }
+
+  .dark .enhanced-surface {
+    border: 1px solid oklch(0.15 0.01 240);
+    background: oklch(0.03 0.005 240);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.25),
+                inset 0 1px 0 oklch(0.1 0.008 240);
+  }
+
+  .dark .enhanced-interactive {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid oklch(0.15 0.01 240);
+    background: oklch(0.02 0.003 240);
+  }
+
+  .dark .enhanced-interactive:hover {
+    background: oklch(0.08 0.008 240);
+    border-color: oklch(0.25 0.015 240);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.3),
+                0 2px 4px rgb(0 0 0 / 0.2),
+                inset 0 1px 0 oklch(0.12 0.01 240);
+    transform: translateY(-1px);
+  }
+
+  .dark .enhanced-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.35 0.02 250) transparent;
+  }
+
+  .dark .enhanced-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dark .enhanced-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .dark .enhanced-scrollbar::-webkit-scrollbar-thumb {
+    background: oklch(0.35 0.02 250);
+    border-radius: 3px;
+  }
+
+  .dark .enhanced-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.4 0.025 250);
+  }
+
+  /* Elegant Button Styling for OLED */
+  .dark button {
+    background: linear-gradient(135deg, 
+      oklch(0.05 0.005 240) 0%, 
+      oklch(0.03 0.003 245) 100%);
+    border: 1px solid oklch(0.18 0.012 240);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.2),
+                inset 0 1px 0 oklch(0.08 0.005 240);
+  }
+
+  .dark button:hover {
+    background: linear-gradient(135deg, 
+      oklch(0.08 0.008 240) 0%, 
+      oklch(0.06 0.005 245) 100%);
+    border-color: oklch(0.25 0.015 240);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.25),
+                inset 0 1px 0 oklch(0.12 0.008 240);
+  }
+
+  .dark input, .dark textarea {
+    background: linear-gradient(135deg, 
+      oklch(0.04 0.005 240) 0%, 
+      oklch(0.06 0.003 245) 100%);
+    border: 1px solid oklch(0.2 0.012 240);
+    color: oklch(0.9 0.005 240);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.1),
+                0 1px 0 oklch(0.08 0.005 240);
+  }
+
+  .dark input:focus, .dark textarea:focus {
+    border-color: oklch(0.6 0.12 220);
+    background: linear-gradient(135deg, 
+      oklch(0.06 0.008 240) 0%, 
+      oklch(0.08 0.005 245) 100%);
+    box-shadow: 0 0 0 3px oklch(0.6 0.12 220 / 0.1),
+                inset 0 1px 2px rgb(0 0 0 / 0.1);
+  }
+
+  /* Premium Logo and Title Styling */
+  .dark .logo-container {
+    background: radial-gradient(ellipse at center, 
+      oklch(0.05 0.008 240) 0%, 
+      oklch(0.02 0.003 240) 70%, 
+      oklch(0 0 0) 100%);
+    border: 1px solid oklch(0.12 0.008 240);
+    border-radius: 12px;
+    padding: 8px 16px;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.3),
+                inset 0 1px 0 oklch(0.1 0.005 240);
+  }
+
+  /* Refined Text Input Areas */
+  .dark [role="textbox"], .dark textarea {
+    background: linear-gradient(135deg, 
+      oklch(0.03 0.005 240) 0%, 
+      oklch(0.05 0.003 245) 100%);
+    border: 1px solid oklch(0.18 0.01 240);
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.1),
+                0 1px 0 oklch(0.08 0.005 240);
+  }
+
+  /* Premium Theme Toggle Button */
+  .dark .theme-toggle-button {
+    background: linear-gradient(135deg, 
+      oklch(0.08 0.008 240) 0%, 
+      oklch(0.06 0.005 245) 100%);
+    border: 1px solid oklch(0.25 0.015 240);
+    color: oklch(0.85 0.008 240);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.2),
+                inset 0 1px 0 oklch(0.12 0.008 240);
+  }
+
+  .dark .theme-toggle-button:hover {
+    background: linear-gradient(135deg, 
+      oklch(0.12 0.01 240) 0%, 
+      oklch(0.1 0.008 245) 100%);
+    border-color: oklch(0.35 0.02 240);
+    color: oklch(0.95 0.005 240);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.3),
+                inset 0 1px 0 oklch(0.15 0.01 240);
+    transform: translateY(-1px);
+  }
+
+  .dark .theme-toggle-button svg {
+    filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.3));
+  }
+
+  /* Fix Hide Tool Calls Toggle Switch Visibility */
+  .dark [role="switch"] {
+    background: oklch(0.15 0.008 240);
+    border: 2px solid oklch(0.3 0.015 240);
+  }
+
+  .dark [role="switch"][data-state="checked"] {
+    background: oklch(0.65 0.14 220);
+    border-color: oklch(0.7 0.15 220);
+  }
+
+  .dark [role="switch"] [data-state="checked"] {
+    background: oklch(0.65 0.14 220);
+  }
+
+  .dark [role="switch"] [data-state="unchecked"] {
+    background: oklch(0.15 0.008 240);
+  }
+
+  /* Radix UI Switch specific styling */
+  .dark .switch-root {
+    background: oklch(0.15 0.008 240);
+    border: 2px solid oklch(0.3 0.015 240);
+  }
+
+  .dark .switch-root[data-state="checked"] {
+    background: oklch(0.65 0.14 220);
+    border-color: oklch(0.7 0.15 220);
+  }
+
+  .dark .switch-thumb {
+    background: oklch(0.95 0.005 240);
+    border: 1px solid oklch(0.4 0.02 240);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+  }
+
+  /* Generic switch styling for better visibility */
+  .dark input[type="checkbox"] {
+    background: oklch(0.12 0.008 240);
+    border: 2px solid oklch(0.3 0.015 240);
+  }
+
+  .dark input[type="checkbox"]:checked {
+    background: oklch(0.65 0.14 220);
+    border-color: oklch(0.7 0.15 220);
+  }
+
+  .dark .switch-container {
+    background: oklch(0.08 0.005 240);
+    border: 1px solid oklch(0.25 0.012 240);
+    border-radius: 8px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.15),
+                inset 0 1px 0 oklch(0.12 0.008 240);
+  }
+
+  /* Specific styling for Hide Tool Calls Switch */
+  .dark .hide-tool-calls-switch {
+    background: oklch(0.2 0.01 240);
+    border: 2px solid oklch(0.35 0.015 240);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.2),
+                inset 0 1px 0 oklch(0.25 0.012 240);
+  }
+
+  .dark .hide-tool-calls-switch[data-state="checked"] {
+    background: oklch(0.65 0.14 220);
+    border-color: oklch(0.7 0.16 220);
+    box-shadow: 0 2px 6px rgb(100 150 255 / 0.3),
+                inset 0 1px 0 oklch(0.75 0.18 220);
+  }
+
+  .dark .hide-tool-calls-switch[data-state="unchecked"] {
+    background: oklch(0.2 0.01 240);
+    border-color: oklch(0.35 0.015 240);
+  }
+
+  .dark .hide-tool-calls-switch [data-slot="switch-thumb"] {
+    background: oklch(0.98 0.002 240);
+    border: 1px solid oklch(0.45 0.02 240);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.4),
+                inset 0 1px 0 oklch(1 0 0);
+  }
+
+  .dark .switch-container label {
+    color: oklch(0.85 0.008 240);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  }
+
+  /* ChatGPT-Style Message Styling */
+  
+  /* Message Group Styling - ChatGPT Style */
+  .dark .message-group {
+    margin: 0;
+    padding: 20px 0;
+    width: 100%;
+  }
+
+  .dark .message-group.ai-group {
+    background: oklch(0.06 0.005 240);
+  }
+
+  .dark .message-group.human-group {
+    background: transparent;
+  }
+
+  /* AI Message Content - ChatGPT Style */
+  .dark .ai-message-content {
+    color: oklch(0.9 0.005 240);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* Human Message Content - ChatGPT Style */
+  .dark .human-message-content {
+    color: oklch(0.9 0.005 240);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Enhanced Typography for Messages - ChatGPT Style */
+  .dark .message-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: oklch(0.95 0.002 240);
+  }
+
+  .dark .message-text p {
+    margin: 16px 0;
+  }
+
+  .dark .message-text p:first-child {
+    margin-top: 0;
+  }
+
+  .dark .message-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Code blocks in messages */
+  .dark .message-text pre {
+    background: oklch(0.02 0.003 240);
+    border: 1px solid oklch(0.15 0.008 240);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 12px 0;
+    overflow-x: auto;
+    font-size: 13px;
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.2);
+  }
+
+  .dark .message-text code {
+    background: oklch(0.08 0.005 240);
+    color: oklch(0.85 0.008 250);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    border: 1px solid oklch(0.15 0.008 240);
+  }
+
+  /* Enhanced Message Timestamps and Actions */
+  .dark .message-actions {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .dark .message-group:hover .message-actions {
+    opacity: 1;
+  }
+
+  /* Professional Message Separators */
+  .dark .message-separator {
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      oklch(0.15 0.008 240) 50%, 
+      transparent 100%);
+    margin: 24px 0;
+  }
+
+  /* Enhanced Tool Call Styling */
+  .dark .enhanced-card.tool-call-card {
+    background: linear-gradient(135deg, 
+      oklch(0.03 0.005 240) 0%, 
+      oklch(0.05 0.003 245) 100%);
+    border: 1px solid oklch(0.2 0.012 240);
+    border-radius: 12px;
+    margin: 8px 0;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 0.2),
+                0 1px 3px rgb(0 0 0 / 0.1),
+                inset 0 1px 0 oklch(0.12 0.008 240);
+  }
+
+  .dark .tool-call-header {
+    background: linear-gradient(135deg, 
+      oklch(0.06 0.008 240) 0%, 
+      oklch(0.04 0.005 245) 100%);
+    border-bottom: 1px solid oklch(0.18 0.01 240);
+    padding: 12px 16px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .dark .tool-call-content {
+    padding: 16px;
+    color: oklch(0.88 0.005 240);
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Avatar Improvements - ChatGPT Style */
+  .dark .message-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dark .ai-avatar {
+    background: oklch(0.3 0.02 240);
+    color: oklch(0.9 0.005 240);
+  }
+
+  .dark .human-avatar {
+    background: oklch(0.25 0.015 40);
+    color: oklch(0.95 0.002 240);
+  }
+
+  /* ChatGPT-Style Layout */
+  .dark .message-container {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Message Actions - Hide by default, show on hover */
+  .message-actions {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    margin-top: 8px;
+  }
+
+  .message-group:hover .message-actions,
+  .message-group:focus-within .message-actions {
+    opacity: 1;
+  }
+
+  /* Style action buttons to be completely hidden until hover */
+  .dark .message-actions button {
+    background: transparent;
+    border: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .dark .message-actions button:hover {
+    background: oklch(0.15 0.005 240);
+    opacity: 1;
+  }
+
+  .light .message-actions button {
+    background: transparent;
+    border: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .light .message-actions button:hover {
+    background: rgb(249, 249, 249);
+    opacity: 1;
+  }
+
+  /* Ensure action buttons are never shown by default */
+  .message-actions {
+    visibility: hidden;
+  }
+
+  .message-group:hover .message-actions,
+  .message-group:focus-within .message-actions {
+    visibility: visible;
+  }
+
+  /* Light mode styles */
+  .light .message-group {
+    margin: 0;
+    padding: 20px 0;
+  }
+
+  .light .message-group.ai-group {
+    background: rgb(247, 247, 248);
+  }
+
+  .light .message-group.human-group {
+    background: transparent;
+  }
+
+  .light .ai-message-content {
+    color: rgb(13, 13, 13);
+  }
+
+  .light .human-message-content {
+    color: rgb(13, 13, 13);
+  }
+
+  .light .ai-avatar {
+    background: rgb(25, 195, 125);
+    color: white;
+  }
+
+  .light .human-avatar {
+    background: rgb(171, 104, 255);
+    color: white;
+  }
+
+  .light .message-container {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 24px;
   }
 }

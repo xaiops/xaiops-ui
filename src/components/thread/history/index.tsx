@@ -97,7 +97,7 @@ export default function ThreadHistory() {
   return (
     <>
       <div className="shadow-inner-right hidden h-screen w-[300px] shrink-0 flex-col items-start justify-start gap-6 border-r-[1px] border-slate-300 lg:flex">
-        <div className="flex w-full items-center justify-between px-4 pt-1.5">
+        <div className="flex w-full items-center px-4 pt-1.5">
           <Button
             className="hover:bg-accent enhanced-interactive"
             variant="ghost"
@@ -109,7 +109,7 @@ export default function ThreadHistory() {
               <PanelRightClose className="size-5" />
             )}
           </Button>
-          <h1 className="text-xl font-semibold tracking-tight">
+          <h1 className="flex-1 text-center text-xl font-semibold tracking-tight">
             Thread History
           </h1>
         </div>

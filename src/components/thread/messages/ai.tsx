@@ -141,8 +141,8 @@ export function AssistantMessage({
   }
 
   return (
-    <div className="group mr-auto flex items-start gap-2">
-      <div className="flex flex-col gap-2 max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+    <div className="group mr-auto flex items-start gap-2 w-full max-w-full">
+      <div className="flex flex-col gap-2 max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl w-full min-w-0">
         {isToolResult ? (
           <>
             <ToolResult message={message} />
@@ -156,15 +156,23 @@ export function AssistantMessage({
           <>
             {contentString.length > 0 && (
               <div className="py-1">
-                <div className="!w-fit" style={{width: 'fit-content'}}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">
-                      AI
+                <div className="flex items-start gap-3">
+                  {/* Professional Mortgage Advisor Avatar */}
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-8 h-8 ai-avatar rounded-lg flex items-center justify-center shadow-sm">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 21h18M5 21V7l8-4v18M19 21V10l-6-3M9 9h1m-1 4h1m-1 4h1m5-8h1m-1 4h1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
                     </div>
                   </div>
-                  <div className="bg-muted rounded-2xl px-4 py-3 text-left overflow-hidden">
-                    <div className="break-words overflow-wrap-anywhere">
-                      <MarkdownText>{contentString}</MarkdownText>
+                  <div className="flex-1 min-w-0 max-w-none">
+                    <div className="mb-1">
+                      <span className="text-sm font-medium text-primary">Mortgage Advisor</span>
+                    </div>
+                    <div className="glass-message-container glass-ai-message px-4 py-3 text-left max-w-full">
+                      <div className={`break-words overflow-wrap-anywhere word-break-break-word message-text ai-message-content enhanced-scrollbar message-content-smart ${contentString.length < 500 ? 'short-content' : contentString.length < 1500 ? 'medium-content' : 'long-content'}`}>
+                        <MarkdownText>{contentString}</MarkdownText>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -225,17 +233,25 @@ export function AssistantMessage({
 export function AssistantMessageLoading() {
   return (
     <div className="mr-auto flex items-start gap-2">
-      <div className="flex flex-col gap-2 max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
-        <div className="!w-fit" style={{width: 'fit-content'}}>
-          <div className="flex items-center gap-2 mb-2">
-            <div className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">
-              AI
+      <div className="flex flex-col gap-2 max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl">
+        <div className="flex items-start gap-3">
+          {/* Professional Mortgage Advisor Avatar */}
+          <div className="flex-shrink-0 mt-1">
+            <div className="w-8 h-8 ai-avatar rounded-lg flex items-center justify-center shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M3 21h18M5 21V7l8-4v18M19 21V10l-6-3M9 9h1m-1 4h1m-1 4h1m5-8h1m-1 4h1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
           </div>
-          <div className="bg-muted flex h-8 items-center gap-1 rounded-2xl px-4 py-2">
-            <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>
-            <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_0.5s_infinite] rounded-full"></div>
-            <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_1s_infinite] rounded-full"></div>
+          <div className="flex-1 min-w-0">
+            <div className="mb-1">
+              <span className="text-sm font-medium text-primary">Mortgage Advisor</span>
+            </div>
+            <div className="bg-muted flex h-8 items-center gap-1 rounded-2xl px-4 py-2">
+              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>
+              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_0.5s_infinite] rounded-full"></div>
+              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_1s_infinite] rounded-full"></div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,29 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mortgage-assistant-ui
+  name: xaiops-ui
   labels:
-    app: mortgage-assistant-ui
+    app: xaiops-ui
     version: v1
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: mortgage-assistant-ui
+      app: xaiops-ui
   template:
     metadata:
       labels:
-        app: mortgage-assistant-ui
+        app: xaiops-ui
         version: v1
     spec:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1001
-        runAsGroup: 0
-        fsGroup: 0
       containers:
-      - name: mortgage-assistant-ui
-        image: quay.io/rbrhssa/mortgage-agent-ui:latest
+      - name: xaiops-ui
+        image: quay.io/rbrhssa/xaiops-ui:latest
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -77,7 +74,6 @@ spec:
         securityContext:
           allowPrivilegeEscalation: false
           runAsNonRoot: true
-          runAsUser: 1001
           capabilities:
             drop:
             - ALL

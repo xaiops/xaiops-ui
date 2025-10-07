@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: app-config
   labels:
-    app: mortgage-assistant-ui
+    app: xaiops-ui
 data:
   langgraph-api-url: "http://host.containers.internal:2024"
   api-base-url: "https://your-api.example.com"

@@ -1,11 +1,11 @@
-# Mortgage Assistant UI - Container Build and Deploy Makefile
+# xAIOps UI - Container Build and Deploy Makefile
 
 # Variables
-IMAGE_NAME = mortgage-agent-ui
+IMAGE_NAME = xaiops-ui
 IMAGE_TAG = latest
 REGISTRY ?= quay.io/rbrhssa
-NAMESPACE ?= mortgage-assistant-ui
-APP_NAME = mortgage-assistant-ui
+NAMESPACE ?= xaiops-ui
+APP_NAME = xaiops-ui
 
 # Default target
 .PHONY: help
@@ -59,7 +59,7 @@ oc-login: ## Login to OpenShift (requires OC_SERVER and OC_TOKEN env vars)
 
 .PHONY: oc-create-project
 oc-create-project: ## Create OpenShift project
-	oc new-project $(NAMESPACE) --display-name="Mortgage Assistant UI" || oc project $(NAMESPACE)
+	oc new-project $(NAMESPACE) --display-name="xAIOps UI" || oc project $(NAMESPACE)
 
 .PHONY: oc-deploy
 oc-deploy: ## Deploy to OpenShift
@@ -154,11 +154,11 @@ dev-test: ## Test the application locally
 # Environment-specific targets
 .PHONY: staging-deploy
 staging-deploy: ## Deploy to staging environment
-	$(MAKE) oc-full-deploy NAMESPACE=mortgage-assistant-ui-staging
+	$(MAKE) oc-full-deploy NAMESPACE=xaiops-ui-staging
 
 .PHONY: prod-deploy  
 prod-deploy: ## Deploy to production environment
-	$(MAKE) oc-full-deploy NAMESPACE=mortgage-assistant-ui-prod
+	$(MAKE) oc-full-deploy NAMESPACE=xaiops-ui-prod
 
 # Scale targets
 .PHONY: oc-scale-up

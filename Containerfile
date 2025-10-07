@@ -37,16 +37,15 @@ RUN pnpm install --frozen-lockfile && \
     pnpm store prune && \
     npm cache clean --force
 
-# Copy built application from builder stage with proper ownership
-COPY --from=builder --chown=1001:0 /opt/app-root/src/.next ./.next
-COPY --from=builder --chown=1001:0 /opt/app-root/src/public ./public
+# Copy built application from builder stage
+COPY --from=builder /opt/app-root/src/.next ./.next
+COPY --from=builder /opt/app-root/src/public ./public
 
-# Create next.config.mjs with proper ownership
-COPY --chown=1001:0 next.config.mjs ./
+# Create next.config.mjs
+COPY next.config.mjs ./
 
-# Create cache directory with proper permissions
+# Create cache directory with proper group permissions
 RUN mkdir -p /opt/app-root/src/.next/cache && \
-    chown -R 1001:0 /opt/app-root/src/.next/cache && \
     chmod -R g+rwX /opt/app-root/src/.next/cache
 
 # Expose port 8080 (OpenShift standard)
@@ -56,9 +55,6 @@ EXPOSE 8080
 ENV NODE_ENV=production
 ENV PORT=8080
 ENV HOSTNAME="0.0.0.0"
-
-# Use the default user from the base image (UID 1001)
-USER 1001
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \

@@ -167,7 +167,7 @@ export function AssistantMessage({
                   </div>
                   <div className="flex-1 min-w-0 max-w-none">
                     <div className="mb-1">
-                      <span className="text-sm font-medium text-primary">Mortgage Advisor</span>
+                      <span className="text-sm font-medium text-primary">xAIOps Assistant</span>
                     </div>
                     <div className="glass-message-container glass-ai-message px-4 py-3 text-left max-w-full">
                       <div className={`break-words overflow-wrap-anywhere word-break-break-word message-text ai-message-content enhanced-scrollbar message-content-smart ${contentString.length < 500 ? 'short-content' : contentString.length < 1500 ? 'medium-content' : 'long-content'}`}>
@@ -245,7 +245,7 @@ export function AssistantMessageLoading() {
           </div>
           <div className="flex-1 min-w-0">
             <div className="mb-1">
-              <span className="text-sm font-medium text-primary">Mortgage Advisor</span>
+              <span className="text-sm font-medium text-primary">xAIOps Assistant</span>
             </div>
             <div className="bg-muted flex h-8 items-center gap-1 rounded-2xl px-4 py-2">
               <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>

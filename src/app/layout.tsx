@@ -12,8 +12,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Mortgage Assistant",
-  description: "Professional mortgage guidance and support",
+  title: "xAIOps",
+  description: "AI-powered operations assistant",
 };
 
 export default function RootLayout({

@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 metadata:
-  name: mortgage-assistant-ui
-  namespace: mortgage-assistant-ui
+  name: xaiops-ui
+  namespace: xaiops-ui
 
 resources:
   - configmap.yaml
@@ -12,11 +12,11 @@ resources:
   - route.yaml
 
 commonLabels:
-  app: mortgage-assistant-ui
+  app: xaiops-ui
   version: v1
 
-namespace: mortgage-assistant-ui
+namespace: xaiops-ui
 
 images:
-  - name: quay.io/rbrhssa/mortgage-agent-ui
+  - name: quay.io/rbrhssa/xaiops-ui
     newTag: latest

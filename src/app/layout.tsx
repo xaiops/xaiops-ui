@@ -12,8 +12,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "xAIOps",
-  description: "AI-powered operations assistant",
+  title: "Agentic Ops",
+  description: "Agentic AI-powered operations assistant",
 };
 
 export default function RootLayout({

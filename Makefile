@@ -1,4 +1,4 @@
-# xAIOps UI - Container Build and Deploy Makefile
+# AiOps UI - Container Build and Deploy Makefile
 
 # Variables
 IMAGE_NAME = xaiops-ui
@@ -15,12 +15,40 @@ help: ## Show this help message
 
 # Build targets
 .PHONY: build
-build: ## Build container image with Podman
+build: ## Build container image with Podman (native architecture - fast!)
 	podman build -t $(IMAGE_NAME):$(IMAGE_TAG) -f Containerfile .
 
+.PHONY: build-x86
+build-x86: ## Build x86_64 image on ARM64 Mac (pre-build method - fast!)
+	@echo "=== Building Next.js app locally (native ARM64)..."
+	pnpm install
+	pnpm build
+	@echo "=== Cleaning cache directory..."
+	rm -rf .next/cache
+	@echo "=== Building x86_64 container with pre-built artifacts..."
+	podman build --platform linux/amd64 -t $(IMAGE_NAME):$(IMAGE_TAG) -f Containerfile.prebuilt .
+	@echo "✅ x86_64 image built successfully!"
+
+.PHONY: build-amd64
+build-amd64: ## Build x86_64 image (full build in container - SLOW/CRASHES on ARM64!)
+	@echo "⚠️  Warning: This may crash due to QEMU emulation issues!"
+	@echo "⚠️  Consider using 'make build-x86' instead (pre-build method)"
+	@sleep 3
+	podman build --platform linux/amd64 -t $(IMAGE_NAME):$(IMAGE_TAG) -f Containerfile .
+
+.PHONY: build-arm64
+build-arm64: ## Build ARM64 image
+	podman build --platform linux/arm64 -t $(IMAGE_NAME):$(IMAGE_TAG) -f Containerfile .
+
 .PHONY: build-docker
-build-docker: ## Build container image with Docker
-	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) -f Containerfile .
+build-docker: ## Build container image with Docker (x86_64/amd64)
+	docker build --platform linux/amd64 -t $(IMAGE_NAME):$(IMAGE_TAG) -f Containerfile .
+
+.PHONY: build-multiarch
+build-multiarch: ## Build multi-arch container image (amd64 and arm64) - SLOW!
+	@echo "Building multi-arch image (this will take a while)..."
+	@echo "Consider using GitHub Actions instead for faster cloud builds!"
+	docker buildx build --platform linux/amd64,linux/arm64 -t $(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG) -f Containerfile .
 
 # Local run targets
 .PHONY: run
@@ -48,6 +76,10 @@ tag: ## Tag image for registry
 push: tag ## Push image to registry
 	podman push $(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
 
+.PHONY: build-push-x86
+build-push-x86: build-x86 tag push ## Build x86_64 image and push to registry (fast!)
+	@echo "✅ x86_64 image built and pushed to $(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)"
+
 # OpenShift targets
 .PHONY: oc-login
 oc-login: ## Login to OpenShift (requires OC_SERVER and OC_TOKEN env vars)
@@ -59,7 +91,7 @@ oc-login: ## Login to OpenShift (requires OC_SERVER and OC_TOKEN env vars)
 
 .PHONY: oc-create-project
 oc-create-project: ## Create OpenShift project
-	oc new-project $(NAMESPACE) --display-name="xAIOps UI" || oc project $(NAMESPACE)
+	oc new-project $(NAMESPACE) --display-name="AiOps UI" || oc project $(NAMESPACE)
 
 .PHONY: oc-deploy
 oc-deploy: ## Deploy to OpenShift

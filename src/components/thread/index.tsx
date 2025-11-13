@@ -404,6 +404,7 @@ export function Thread() {
                 <>
                   {messages
                     .filter((m) => !m.id?.startsWith(DO_NOT_RENDER_ID_PREFIX))
+                    .filter((m) => m.type !== "system")
                     .map((message, index) =>
                       message.type === "human" ? (
                         <HumanMessage
@@ -460,6 +461,7 @@ export function Thread() {
                     <form
                       onSubmit={handleSubmit}
                       className="mx-auto grid max-w-3xl grid-rows-[1fr_auto] gap-2"
+                      autoComplete="off"
                       suppressHydrationWarning
                     >
                       <ContentBlocksPreview
@@ -485,6 +487,7 @@ export function Thread() {
                         }}
                         placeholder="Type your message..."
                         className="field-sizing-content resize-none border-none bg-transparent p-3.5 pb-0 shadow-none ring-0 outline-none focus:ring-0 focus:outline-none"
+                        autoComplete="off"
                         suppressHydrationWarning
                       />
 
@@ -521,6 +524,7 @@ export function Thread() {
                           multiple
                           accept="image/jpeg,image/png,image/gif,image/webp,application/pdf"
                           className="hidden"
+                          suppressHydrationWarning
                         />
                         {stream.isLoading ? (
                           <Button

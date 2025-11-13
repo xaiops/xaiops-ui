@@ -1,0 +1,47 @@
+# Containerfile for pre-built applications
+# This avoids QEMU emulation issues by copying pre-built artifacts
+# Usage: Build locally first with `pnpm build`, then use this Containerfile
+
+ARG NODE_VERSION=20
+
+# Production stage - runs on target architecture
+FROM registry.access.redhat.com/ubi8/nodejs-20:latest AS runner
+
+# Install pnpm in production image
+RUN npm install -g pnpm@10.5.1
+
+# Create app directory with proper permissions
+WORKDIR /opt/app-root/src
+
+# Copy package files for production dependencies
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies (including next.js which is in devDependencies but needed for production)
+RUN pnpm install --frozen-lockfile && \
+    pnpm store prune && \
+    npm cache clean --force
+
+# Copy pre-built application from host (cache cleaned by Makefile)
+COPY .next ./.next
+COPY public ./public
+COPY next.config.mjs ./
+
+# Create fresh cache directory with proper permissions
+RUN mkdir -p /opt/app-root/src/.next/cache && \
+    chmod -R g+rwX /opt/app-root/src/.next
+
+# Expose port 8080 (OpenShift standard)
+EXPOSE 8080
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=8080
+ENV HOSTNAME="0.0.0.0"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD node -e "const http = require('http'); const req = http.request('http://localhost:8080/api/health', res => process.exit(res.statusCode === 200 ? 0 : 1)); req.on('error', () => process.exit(1)); req.end();"
+
+# Start the application
+CMD ["pnpm", "start"]
+

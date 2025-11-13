@@ -112,19 +112,20 @@ export function HumanMessage({
             {/* Render text if present, otherwise fallback to file/image name */}
             {contentString ? (
               <div className="flex items-start gap-3">
-                {/* Professional Client Avatar */}
+                {/* Modern User Avatar */}
                 <div className="flex-shrink-0 mt-1">
-                  <div className="w-8 h-8 human-avatar rounded-lg flex items-center justify-center shadow-sm">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <div className="w-8 h-8 human-avatar rounded-full flex items-center justify-center shadow-md ring-2 ring-offset-2 ring-offset-background ring-green-500/20">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M6 21v-1a6 6 0 0 1 6-6v0a6 6 0 0 1 6 6v1" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </div>
                 </div>
                 <div className="flex-1 min-w-0 max-w-none">
-                  <div className="mb-1">
-                    <span className="text-sm font-medium text-muted-foreground">Client</span>
+                  <div className="mb-1.5">
+                    <span className="text-sm font-semibold text-foreground">You</span>
                   </div>
-                  <div className="glass-message-container glass-human-message px-4 py-2 text-left message-text max-w-full">
+                  <div className="glass-message-container glass-human-message px-4 py-3 text-left message-text max-w-full transition-all duration-200">
                     <p className={`whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-word human-message-content enhanced-scrollbar message-content-smart ${contentString.length < 500 ? 'short-content' : contentString.length < 1500 ? 'medium-content' : 'long-content'}`}>
                       {contentString}
                     </p>

@@ -6,7 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build outputs
-.next/
+# Note: .next/ main directory needed for Containerfile.prebuilt
+# But exclude the cache subdirectory
+.next/cache/
 out/
 build/
 dist/

@@ -157,19 +157,21 @@ export function AssistantMessage({
             {contentString.length > 0 && (
               <div className="py-1">
                 <div className="flex items-start gap-3">
-                  {/* Professional Mortgage Advisor Avatar */}
+                  {/* AI Assistant Avatar */}
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-8 h-8 ai-avatar rounded-lg flex items-center justify-center shadow-sm">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                        <path d="M3 21h18M5 21V7l8-4v18M19 21V10l-6-3M9 9h1m-1 4h1m-1 4h1m5-8h1m-1 4h1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <div className="w-8 h-8 ai-avatar rounded-full flex items-center justify-center shadow-md ring-2 ring-offset-2 ring-offset-background ring-blue-500/20">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M2 17l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </div>
                   </div>
                   <div className="flex-1 min-w-0 max-w-none">
-                    <div className="mb-1">
-                      <span className="text-sm font-medium text-primary">xAIOps Assistant</span>
+                    <div className="mb-1.5">
+                      <span className="text-sm font-semibold text-primary">AI Assistant</span>
                     </div>
-                    <div className="glass-message-container glass-ai-message px-4 py-3 text-left max-w-full">
+                    <div className="glass-message-container glass-ai-message px-4 py-3 text-left max-w-full transition-all duration-200">
                       <div className={`break-words overflow-wrap-anywhere word-break-break-word message-text ai-message-content enhanced-scrollbar message-content-smart ${contentString.length < 500 ? 'short-content' : contentString.length < 1500 ? 'medium-content' : 'long-content'}`}>
                         <MarkdownText>{contentString}</MarkdownText>
                       </div>
@@ -235,22 +237,24 @@ export function AssistantMessageLoading() {
     <div className="mr-auto flex items-start gap-2">
       <div className="flex flex-col gap-2 max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl">
         <div className="flex items-start gap-3">
-          {/* Professional Mortgage Advisor Avatar */}
+          {/* AI Assistant Avatar */}
           <div className="flex-shrink-0 mt-1">
-            <div className="w-8 h-8 ai-avatar rounded-lg flex items-center justify-center shadow-sm">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M3 21h18M5 21V7l8-4v18M19 21V10l-6-3M9 9h1m-1 4h1m-1 4h1m5-8h1m-1 4h1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <div className="w-8 h-8 ai-avatar rounded-full flex items-center justify-center shadow-md ring-2 ring-offset-2 ring-offset-background ring-blue-500/20">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 17l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
           </div>
           <div className="flex-1 min-w-0">
-            <div className="mb-1">
-              <span className="text-sm font-medium text-primary">xAIOps Assistant</span>
+            <div className="mb-1.5">
+              <span className="text-sm font-semibold text-primary">AI Assistant</span>
             </div>
-            <div className="bg-muted flex h-8 items-center gap-1 rounded-2xl px-4 py-2">
-              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>
-              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_0.5s_infinite] rounded-full"></div>
-              <div className="bg-foreground/50 h-1.5 w-1.5 animate-[pulse_1.5s_ease-in-out_1s_infinite] rounded-full"></div>
+            <div className="glass-message-container glass-ai-message flex h-10 items-center gap-1.5 px-4 py-2">
+              <div className="bg-primary/60 h-2 w-2 animate-[pulse_1.5s_ease-in-out_infinite] rounded-full"></div>
+              <div className="bg-primary/60 h-2 w-2 animate-[pulse_1.5s_ease-in-out_0.5s_infinite] rounded-full"></div>
+              <div className="bg-primary/60 h-2 w-2 animate-[pulse_1.5s_ease-in-out_1s_infinite] rounded-full"></div>
             </div>
           </div>
         </div>
